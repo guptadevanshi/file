@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <h1>Guess The Number</h1>
+    </div>
+    <div class="button"><button onclick="Guess()">Start Game
+        </button>
+    </div>
+    <div id="result">
+
+    </div>
+</body>
+
+
+<script>
+
+    function Guess() {
+
+        let noOfAttempts = 0;
+        let guess = false;
+
+        let userNo = parseInt(prompt("Enter a number between 1 and 100"));
+        if (isNaN(userNo) || userNo < 1 || userNo > 100) {
+            alert("Invalid number entered. Please enter a number between 1 and 100.");
+            Guess()
+        } else {
+            let result = document.getElementById("result")
+            for (let i = 1; i <= 5; i++) {
+                noOfAttempts++;
+                const computerGuess = Math.floor(Math.random() * 100) + 1;
+                let h2 = document.createElement("h2")
+                h2.innerHTML = `Computer Guess: ${computerGuess}`;
+                result.append(h2);
+
+                if (userNo === computerGuess) {
+                    guess = true;
+                    break;
+                }
+            }
+            setTimeout(() => {
+                if (guess) {
+                    alert("Computer wins! The number was " + userNo + " and it took " + noOfAttempts + " attempts to guess correctly.");
+                }
+                else {
+                    alert("User wins! The number was " + userNo + " and the computer was unable to guess it within 5 attempts.");
+                }
+            }, 1000);
+
+        }
+    }
+</script>
+
+</html>
